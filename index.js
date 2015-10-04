@@ -8,7 +8,7 @@ module.exports = function (options) {
     return {
         get: function (id) {
             return new Promise((resolve, reject) => {
-                redis.hgetall(id, (error, session) => {
+                client.hgetall(id, (error, session) => {
                     if (error) {
                         reject(error);
                     } else if (session) {
@@ -33,7 +33,7 @@ module.exports = function (options) {
                 timeout = timeout >= 0 ? timeout : 7 * 86400;
 
                 let session = {id, time, data: JSON.stringify(data)};
-                redis.multi()
+                client.multi()
                     .hmset(id, session)
                     .expire(id, timeout)
                     .exec(error => {
