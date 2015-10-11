@@ -28,9 +28,9 @@ module.exports = function (options) {
 
         set: function (id, data, time, timeout) {
             return new Promise((resolve, reject) => {
-                id = 'reddiz:' + id;
+                id += '';
                 time = time || Date.now();
-                timeout = timeout >= 0 ? timeout : 7 * 86400;
+                timeout = typeof timeout === 'number' ? timeout : 7 * 86400;
 
                 let session = {id, time, data: JSON.stringify(data)};
                 client.multi()
