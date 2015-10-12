@@ -26,11 +26,11 @@ module.exports = function (options) {
             });
         },
 
-        set: function (id, data, time, timeout) {
+        set: function (id, data, timeout, time) {
             return new Promise((resolve, reject) => {
                 id += '';
-                time = time || Date.now();
-                timeout = typeof timeout === 'number' ? timeout : 7 * 86400;
+                time = +time || Date.now();
+                timeout = timeout >= 0 && timeout !== null ? timeout : 7 * 86400;
 
                 let session = {id, time, data: JSON.stringify(data)};
                 client.multi()
