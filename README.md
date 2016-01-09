@@ -14,6 +14,7 @@ global[Symbol.for('__reddiz-client__')]
 ## get(id<sup>abc</sup>)
 This method returns a promise and calls resolve-function with a session by id. Object of session contains the following fields:
 + **id** - session's identifier;
++ **timeout** - the number of seconds before expiration or null;
 + **time** - the time of the last update;
 + **data** - JSON-compatible object.
 

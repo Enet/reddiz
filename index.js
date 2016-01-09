@@ -3,7 +3,8 @@
 let redis = require('redis');
 
 module.exports = function (options) {
-    let client = global[Symbol.for('__reddiz-client__')] = redis.createClient(options || {});
+    let client = options.client ? options.client : (global[Symbol.for('__reddiz-client__')] || redis.createClient(options || {}));
+    global[Symbol.for('__reddiz-client__')] = client;
 
     return {
         get: function (id) {
@@ -15,6 +16,7 @@ module.exports = function (options) {
                         try {
                             session.data = JSON.parse(session.data);
                             session.loaded = true;
+                            session.timeout = +session.timeout || null;
                             resolve(session);
                         } catch (error) {
                             reject(error);
@@ -30,12 +32,13 @@ module.exports = function (options) {
             return new Promise((resolve, reject) => {
                 id += '';
                 time = +time || Date.now();
-                timeout = timeout >= 0 && timeout !== null ? timeout : 7 * 86400;
 
-                let session = {id, time, data: JSON.stringify(data)};
+                let expire = timeout >= 0 && timeout !== null ? timeout : 7 * 86400,
+                    session = {id, time, timeout, data: JSON.stringify(data)};
+
                 client.multi()
                     .hmset(id, session)
-                    .expire(id, timeout)
+                    .expire(id, expire)
                     .exec(error => {
                         if (error) {
                             reject(error);
