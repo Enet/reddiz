@@ -1,6 +1,6 @@
 {
     "name": "reddiz",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "The simplest sessions in redis.",
     "main": "index.js",
     "keywords": [
@@ -22,7 +22,7 @@
         "url": "zhevak.name"
     },
     "repository": "https://github.com/Enet/reddiz",
-    "license": "GPLv3",
+    "license": "GPL-3.0",
     "engines": {
         "node": ">=4.0.0"
     }
