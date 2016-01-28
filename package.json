@@ -1,6 +1,6 @@
 {
     "name": "reddiz",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "The simplest sessions in redis.",
     "main": "index.js",
     "keywords": [

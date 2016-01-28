@@ -3,6 +3,7 @@
 let redis = require('redis');
 
 module.exports = function (options) {
+    options = options || {};
     let client = options.client ? options.client : (global[Symbol.for('__reddiz-client__')] || redis.createClient(options || {}));
     global[Symbol.for('__reddiz-client__')] = client;
 
