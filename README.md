@@ -1,4 +1,6 @@
 # reddiz
+**DON'T USE THE PACKAGE. IT'S DEPRECATED!!!**
+
 This module provides API to store sessions using redis database. There are only two easy methods: get and set. To process user request properly you need firstly read session, then probably change it and finally save changes.
 
 ## require('reddiz')(options<sup>{ }</sup>)
